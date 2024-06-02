@@ -18,6 +18,6 @@ public class AuthController : ControllerBase
 
     [AllowAnonymous]
     [HttpPost]
-    public Task<AuthModel> Login(string email, string password) =>
-        _authAppService.SignInAsync(email, password);
+    public Task<AuthResponseModel> Login(AuthRequestModel model) =>
+        _authAppService.SignInAsync(model.Email, model.Password);
 }

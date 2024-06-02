@@ -8,7 +8,7 @@ namespace SisRestaurant.Api;
 
 public class MappingProfile : Profile
 {
-    protected MappingProfile()
+    public MappingProfile()
     {
         CreateMap<Restaurant, RestaurantModel>();
         CreateMap<User, UserModel>();

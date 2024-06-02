@@ -1,6 +1,6 @@
 ﻿namespace SisRestaurant.Models.Authentications;
 
-public class AuthModel
+public class AuthResponseModel
 {
     public required string UserId { get; set; }
     public required string AuthorizationToken { get; set; }

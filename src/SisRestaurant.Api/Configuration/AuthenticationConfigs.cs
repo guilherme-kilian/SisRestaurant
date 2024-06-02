@@ -1,30 +1,30 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using SisRestaurant.Models;
 using System.Text;
 
 namespace SisRestaurant.Api.Configuration;
 
 public static class AuthenticationConfigs
 {
-    public static WebApplicationBuilder AddAuthenticationConfigs(this WebApplicationBuilder builder)
+    public static WebApplicationBuilder AddAuthenticationConfigs(this WebApplicationBuilder builder, AppSettings appSettings)
     {
         builder.Services.AddAuthentication(opt =>
         {
             opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
             opt.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        }).AddJwtBearer(opt =>
+        }).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, opt =>
         {
-            var secret = builder.Configuration.GetValue<string>("Secret") ?? throw new ArgumentException("Secret cannot be null");
-            var host = builder.Configuration.GetValue<string>("Host") ?? throw new ArgumentException("Secret cannot be null");
-            var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secret));
+            var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(appSettings.Secret));
             opt.RequireHttpsMetadata = true;
             opt.SaveToken = true;
             opt.TokenValidationParameters = new TokenValidationParameters
             {
                 ValidateIssuerSigningKey = true,
-                ValidAudience = host,
-                ValidIssuer = host,
+                ValidAudience = appSettings.Host,
+                ValidIssuer = appSettings.Host,
+                RequireExpirationTime = true,
                 IssuerSigningKey = key,
                 ValidateLifetime = true,
                 ClockSkew = TimeSpan.Zero

@@ -1,3 +1,4 @@
+using Serilog;
 using SisRestaurant.Api.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -5,11 +6,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder
-    .AddGeneralConfigs()
+    .AddGeneralConfigs(out var appSettings)
+    .AddAuthenticationConfigs(appSettings)
     .AddApiConfigs()
     .AddDbConfigs()
     .AddSwaggerConfigs()
-    .AddAuthenticationConfigs()
+    .AddLoggingConfigs()
     .AddDependencyInjectionConfigs();
 
 var app = builder.Build();
@@ -20,11 +22,11 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
-
+app.UseSerilogRequestLogging();
+app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseAuthentication();
-
-app.MapControllers();
+app.MapControllers()
+    .RequireAuthorization();
 
 app.Run();

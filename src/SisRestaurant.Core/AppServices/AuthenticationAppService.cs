@@ -25,7 +25,7 @@ public class AuthenticationAppService : BaseAppService
         _userManager = userManager;
     }
 
-    public async Task<AuthModel> SignInAsync(string email, string password)
+    public async Task<AuthResponseModel> SignInAsync(string email, string password)
     {
         var user = await _userManager.FindByEmailAsync(email);
 
@@ -39,7 +39,7 @@ public class AuthenticationAppService : BaseAppService
         return GenerateAuthorizationToken(user.Id, user.UserName);            
     }
 
-    private AuthModel GenerateAuthorizationToken(string userId, string userName)
+    private AuthResponseModel GenerateAuthorizationToken(string userId, string userName)
     {
         var now = DateTime.UtcNow;
         var secret = _appSettings.Secret;
@@ -49,7 +49,7 @@ public class AuthenticationAppService : BaseAppService
 
         //userClaims.AddRange(roles.Select(r => new Claim(ClaimsIdentity.DefaultRoleClaimType, r)));
 
-        var expires = now.Add(TimeSpan.FromMinutes(60));
+        var expires = now.Add(TimeSpan.FromDays(7));
 
         var jwt = new JwtSecurityToken(
                 notBefore: now,
@@ -61,7 +61,7 @@ public class AuthenticationAppService : BaseAppService
 
         var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
-        var resp = new AuthModel
+        var resp = new AuthResponseModel
         {
             UserId = userId,
             AuthorizationToken = encodedJwt,
