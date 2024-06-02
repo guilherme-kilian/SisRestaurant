@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace SisRestaurant.Models.Users;
 
-namespace SisRestaurant.Models.Users
+public class UpdateUserModel
 {
-    public class UpdateUserModel
-    {
-    }
 }

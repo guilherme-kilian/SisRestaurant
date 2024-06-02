@@ -4,14 +4,13 @@ using SisRestaurant.Infra.Domain.Users;
 using SisRestaurant.Models.Restaurants;
 using SisRestaurant.Models.Users;
 
-namespace SisRestaurant.Api
+namespace SisRestaurant.Api;
+
+public class MappingProfile : Profile
 {
-    public class MappingProfile : Profile
+    protected MappingProfile()
     {
-        protected MappingProfile()
-        {
-            CreateMap<Restaurant, RestaurantModel>();
-            CreateMap<User, UserModel>();
-        }
+        CreateMap<Restaurant, RestaurantModel>();
+        CreateMap<User, UserModel>();
     }
 }

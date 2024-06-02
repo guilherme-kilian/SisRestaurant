@@ -1,7 +1,6 @@
-﻿namespace SisRestaurant.Models
+﻿namespace SisRestaurant.Models;
+
+public class AppSettings
 {
-    public class AppSettings
-    {
-        public required string Secret { get; set; }
-    }
+    public required string Secret { get; set; }
 }

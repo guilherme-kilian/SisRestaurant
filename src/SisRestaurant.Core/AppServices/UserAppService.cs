@@ -6,58 +6,57 @@ using SisRestaurant.Infra.Domain.Users;
 using SisRestaurant.Infra.Exceptions;
 using SisRestaurant.Models.Users;
 
-namespace SisRestaurant.Core.AppServices
+namespace SisRestaurant.Core.AppServices;
+
+public class UserAppService : BaseAppService, IAppService<CreateUserModel, UpdateUserModel, UserModel, string>
 {
-    public class UserAppService : BaseAppService, IAppService<CreateUserModel, UpdateUserModel, UserModel, string>
+    private readonly UserManager<User> _userManager;
+
+    public UserAppService(SisRestaurantContext db, UserManager<User> userManager, IMapper mapper) : base(db, mapper)
     {
-        private readonly UserManager<User> _userManager;
+        _userManager = userManager;
+    }
 
-        public UserAppService(SisRestaurantContext db, UserManager<User> userManager, IMapper mapper) : base(db, mapper)
+    public async Task<UserModel> Create(CreateUserModel create)
+    {
+        var user = new User(create.FullName, create.UserName, create.Email);
+        var result = await _userManager.CreateAsync(user, create.Password);
+
+        if (!result.Succeeded)
         {
-            _userManager = userManager;
+            throw new UserCreateException(result.Errors);
         }
 
-        public async Task<UserModel> Create(CreateUserModel create)
-        {
-            var user = new User(create.FullName, create.UserName, create.Email);
-            var result = await _userManager.CreateAsync(user, create.Password);
+        return Mapper.Map<UserModel>(user);
+    }
 
-            if (!result.Succeeded)
-            {
-                throw new UserCreateException(result.Errors);
-            }
+    public Task<UserModel> Update(UpdateUserModel create)
+    {
+        throw new NotImplementedException();
+    }
 
-            return Mapper.Map<UserModel>(user);
-        }
+    public Task<UserModel> Delete(string id)
+    {
+        throw new NotImplementedException();
+    }
 
-        public Task<UserModel> Update(UpdateUserModel create)
-        {
-            throw new NotImplementedException();
-        }
+    public async Task<UserModel> Get(string id)
+    {
+        var user = await _userManager.FindByIdAsync(id.ToString());
 
-        public Task<UserModel> Delete(string id)
-        {
-            throw new NotImplementedException();
-        }
+        if (user is null)
+            throw new DataNotFoundException(nameof(user));
 
-        public async Task<UserModel> Get(string id)
-        {
-            var user = await _userManager.FindByIdAsync(id.ToString());
+        return Mapper.Map<UserModel>(user);
+    }
 
-            if (user is null)
-                throw new DataNotFoundException(nameof(user));
+    public async Task<UserModel> GetByEmail(string email)
+    {
+        var user = await _userManager.FindByEmailAsync(email);
 
-            return Mapper.Map<UserModel>(user);
-        }
+        if (user is null)
+            throw new DataNotFoundException(nameof(user));
 
-        public async Task<UserModel> GetByEmail(string email)
-        {
-            var user = await _userManager.FindByEmailAsync(email);
-
-            if (user is null)
-                throw new DataNotFoundException(nameof(user));
-
-            return Mapper.Map<UserModel>(user);
-        }
+        return Mapper.Map<UserModel>(user);
     }
 }
