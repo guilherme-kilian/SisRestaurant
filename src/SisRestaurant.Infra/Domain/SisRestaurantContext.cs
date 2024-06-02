@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using SisRestaurant.Infra.Domain.Categories;
 using SisRestaurant.Infra.Domain.Menus;
 using SisRestaurant.Infra.Domain.Notifications;
@@ -8,9 +9,8 @@ using SisRestaurant.Infra.Domain.Restaurants;
 using SisRestaurant.Infra.Domain.Users;
 namespace SisRestaurant.Infra.Domain;
 
-public class SisRestaurantContext : DbContext
+public class SisRestaurantContext : IdentityDbContext<User>
 {
-    public DbSet<User> Users { get ; set; }
     public DbSet<Restaurant> Restaurants { get; set; }
     public DbSet<Menu> Menus { get; set; }
     public DbSet<MenuItem> MenuItems { get; set; }

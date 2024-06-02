@@ -5,7 +5,7 @@ using SisRestaurant.Models.Restaurants;
 namespace SisRestaurant.Api.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/v1/[controller]")]
 public class RestaurantController : ControllerBase
 {
     private readonly RestaurantAppService _restaurantAppService;
