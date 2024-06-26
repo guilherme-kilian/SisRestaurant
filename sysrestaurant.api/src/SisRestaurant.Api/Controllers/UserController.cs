@@ -19,7 +19,7 @@ public class UserController : ControllerBase
 
     [HttpPost]
     [AllowAnonymous]
-    public Task<UserModel> Create(CreateUserModel create) => _userAppService.Create(create);
+    public Task<UserModel> Create(CreateUserModel create) => _userAppService.Create(string.Empty, create);
 
     [HttpGet]
     public Task<UserModel> Get() => _userAppService.Get(User.GetUserId());

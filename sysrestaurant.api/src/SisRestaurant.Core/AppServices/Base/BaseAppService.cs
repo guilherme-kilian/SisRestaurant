@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using SisRestaurant.Infra.Domain;
+using SisRestaurant.Infra.Domain.Users;
 
 namespace SisRestaurant.Core.AppServices.Base;
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using SisRestaurant.Infra.Domain.Restaurants;
 using SisRestaurant.Infra.Domain.Shared;
 using System.Diagnostics.CodeAnalysis;
 
@@ -12,11 +13,15 @@ public class User : IdentityUser, ISoftDelete
 
     public DateTime DeletedAt { get; private set; }
 
+    public List<Restaurant> Restaurants { get; set; }
+
     public void Delete()
     {
         Deleted = true;
         DeletedAt = DateTime.Now;
     }
+
+    public bool HasPermission(int restaurantId) => Restaurants.Any(i => i.Id == restaurantId && !i.Deleted);
 
     protected User() { }
 

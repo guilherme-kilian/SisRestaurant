@@ -6,10 +6,29 @@ namespace SisRestaurant.Infra.Domain.Menus;
 
 public class MenuItem : SoftDelete
 {
-    public required string Name { get; set; }
+    [Required]
+    public string Name { get; private set; }
 
     [Range(0, double.MaxValue)]
-    public double Price { get; set; }
+    public double Price { get; private set; }
 
-    public required Category Category { get; set; }
+    [Required]
+    public string Product { get; set; }
+
+    [Required]
+    public Category Category { get; private set; }
+
+    protected MenuItem() { }
+
+    public MenuItem(string name, double price, string product, Category category)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(name);
+        ArgumentException.ThrowIfNullOrWhiteSpace(product);
+        ArgumentOutOfRangeException.ThrowIfNegative(price);
+
+        Product = product;
+        Name = name;
+        Price = price;
+        Category = category;
+    }
 }

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using SisRestaurant.Core.AppServices;
+using SisRestaurant.Core.Extensions;
 using SisRestaurant.Models.Restaurants;
 
 namespace SisRestaurant.Api.Controllers;
@@ -20,7 +21,7 @@ public class RestaurantController : ControllerBase
     [HttpPost]
     public Task<RestaurantModel> Create(CreateRestaurantModel create)
     {
-        return _restaurantAppService.Create(create);
+        return _restaurantAppService.Create(User.GetUserId(), create);
     }
 
     [HttpGet]

@@ -7,11 +7,11 @@ namespace SisRestaurant.Api.Controllers;
 
 [Route("api/v1/[controller]")]
 [ApiController]
-public class AuthController : ControllerBase
+public class AuthenticationController : ControllerBase
 {
     private readonly AuthenticationAppService _authAppService;
 
-    public AuthController(AuthenticationAppService authAppService)
+    public AuthenticationController(AuthenticationAppService authAppService)
     {
         _authAppService = authAppService;
     }

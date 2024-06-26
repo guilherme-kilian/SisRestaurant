@@ -8,7 +8,7 @@ using SisRestaurant.Models.Users;
 
 namespace SisRestaurant.Core.AppServices;
 
-public class UserAppService : BaseAppService, IAppService<CreateUserModel, UpdateUserModel, UserModel, string>
+public class UserAppService : BaseAppService, IAppService<CreateUserModel, UserModel, string>
 {
     private readonly UserManager<User> _userManager;
 
@@ -17,7 +17,7 @@ public class UserAppService : BaseAppService, IAppService<CreateUserModel, Updat
         _userManager = userManager;
     }
 
-    public async Task<UserModel> Create(CreateUserModel create)
+    public async Task<UserModel> Create(string userId, CreateUserModel create)
     {
         var user = new User(create.FullName, create.UserName, create.Email);
         var result = await _userManager.CreateAsync(user, create.Password);
