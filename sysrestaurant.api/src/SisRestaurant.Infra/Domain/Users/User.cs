@@ -23,6 +23,8 @@ public class User : IdentityUser, ISoftDelete
 
     public bool HasPermission(int restaurantId) => Restaurants.Any(i => i.Id == restaurantId && !i.Deleted);
 
+    public Restaurant GetRestaurant(int restaurantId) => Restaurants.First(i => i.Id == restaurantId && !i.Deleted);
+
     protected User() { }
 
     [SetsRequiredMembers]

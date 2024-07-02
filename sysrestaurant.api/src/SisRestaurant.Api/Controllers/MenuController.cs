@@ -19,7 +19,7 @@ namespace SisRestaurant.Api.Controllers
         [HttpPost]
         public Task Post(CreateMenuModel create) => _menuAppService.Create(User.GetUserId(), create);
 
-        [HttpGet]
+        [HttpGet("{menuId}")]
         public Task Get(int menuId) => _menuAppService.Get(menuId);
     }
 }

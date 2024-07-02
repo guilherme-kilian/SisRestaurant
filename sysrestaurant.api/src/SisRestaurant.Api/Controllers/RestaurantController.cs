@@ -24,7 +24,7 @@ public class RestaurantController : ControllerBase
         return _restaurantAppService.Create(User.GetUserId(), create);
     }
 
-    [HttpGet]
+    [HttpGet("{id}")]
     public Task<RestaurantModel> Get(int id)
     {
         return _restaurantAppService.Get(id);

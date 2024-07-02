@@ -1,4 +1,5 @@
 ﻿using SisRestaurant.Infra.Domain.Menus;
+using SisRestaurant.Infra.Domain.Payments;
 using SisRestaurant.Infra.Domain.Reservations;
 using SisRestaurant.Infra.Domain.Shared;
 using SisRestaurant.Infra.Domain.Users;
@@ -46,6 +47,25 @@ public class Restaurant : SoftDelete
         PhoneNumber = phoneNumber;
         Settings = settings;
         Users = [user];
+    }
+
+    public Reservation Reserve(DateTime reservationDate, User user, int count, Payment? payment = null, string? details = null)
+    {
+        if (reservationDate.Hour < Settings.StartAt.Hours || reservationDate.Hour > Settings.FinishAt.Hours)
+            throw new InvalidOperationException("RestaurantIsClosed");
+
+        var reservations = Reservations
+            .Where(r => r.ReservedAt.Date == reservationDate.Date && r.ReservedAt.Hour == reservationDate.Hour)
+            .Sum(s => s.Count);
+
+        if (reservations >= Settings.Capacity)
+            throw new InvalidOperationException("RestaurantIsFull");
+
+        var reservation = new Reservation(user, this, payment, reservationDate, details, count);
+
+        Reservations.Add(reservation);
+
+        return reservation;
     }
 
     public void SetMenu(Menu menu)

@@ -17,4 +17,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SisRestaurant.Models\SisRestaurant.Models.csproj" />
+  </ItemGroup>
+
 </Project>

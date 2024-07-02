@@ -1,4 +1,5 @@
 ﻿using Hangfire;
+using SisRestaurant.Infra.Services.Notification;
 
 namespace SisRestaurant.Api.Configuration
 {
@@ -17,6 +18,8 @@ namespace SisRestaurant.Api.Configuration
                 }));
 
             builder.Services.AddHangfireServer();
+
+            builder.Services.AddScoped<INotificationSender, EmailSender>();
 
             return builder;
         }
