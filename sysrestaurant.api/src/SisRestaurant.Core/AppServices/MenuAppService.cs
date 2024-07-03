@@ -20,16 +20,16 @@ namespace SisRestaurant.Core.AppServices
             _menuItemAppService = menuItemAppService;
         }
 
-        public async Task<MenuModel> Create(string userId, int restaurantId, CreateMenuModel create)
+        public async Task<MenuModel> Create(string userId, CreateMenuModel create)
         {
-            var user = await Db.Users.GetUserWithRestaurant(userId, restaurantId);
+            var user = await Db.Users.GetUserWithRestaurant(userId, create.RestaurantId);
 
             var menuItems = new List<MenuItem>();
 
             foreach (var item in create.Items)
                 menuItems.Add(await _menuItemAppService.Create(item));
 
-            var restaurant = user.Restaurants.First(r => r.Id == restaurantId);
+            var restaurant = user.Restaurants.First(r => r.Id == create.RestaurantId);
 
             var menu = new Menu(create.Name, menuItems, restaurant);
 
@@ -40,13 +40,15 @@ namespace SisRestaurant.Core.AppServices
             return Mapper.Map<MenuModel>(menu);
         }
 
-        public async Task<MenuModel> Delete(string userId, int restaurantId, int menuId)
+        public async Task<MenuModel> Delete(string userId, int menuId)
         {
-            var user = await Db.Users.GetUserWithRestaurant(userId, menuId);
+            var menu = await Db.Menus
+                .IncludeRestaurantAndUsers()
+                .GetById(menuId)
+                .FirstOrErrorAsync();
 
-            var restaurant = user.Restaurants.First(i => i.Id == restaurantId);
-
-            var menu = restaurant.GetMenu(menuId) ?? throw new InvalidOperationException("MenuNotFound");
+            if(!menu.Restaurant.Users.Any(u => u.Id == userId))
+                throw new InvalidOperationException("UserDoesNotHavePermission");
 
             menu.Delete();
 

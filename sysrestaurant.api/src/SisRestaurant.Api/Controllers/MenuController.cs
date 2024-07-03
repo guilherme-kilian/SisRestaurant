@@ -7,7 +7,7 @@ using SisRestaurant.Models.Menus;
 namespace SisRestaurant.Api.Controllers
 {
     [ApiController]
-    [Route("api/v1/Restaurant/{restaurantId}/[controller]")]
+    [Route("api/v1/[controller]")]
     public class MenuController : ControllerBase
     {
         private readonly MenuAppService _menuAppService;
@@ -18,12 +18,12 @@ namespace SisRestaurant.Api.Controllers
         } 
 
         [HttpPost]
-        public Task<MenuModel> Post(int restaurantId, CreateMenuModel create) => _menuAppService.Create(User.GetUserId(), restaurantId, create);
+        public Task<MenuModel> Post(CreateMenuModel create) => _menuAppService.Create(User.GetUserId(), create);
 
         [HttpGet("{id}")]
-        public Task<MenuModel> Get(int restaurantId, int id) => _menuAppService.Get(id);
+        public Task<MenuModel> Get(int id) => _menuAppService.Get(id);
 
         [HttpDelete("{id}")]
-        public Task<MenuModel> Delete(int restaurantId, int id) => _menuAppService.Delete(User.GetUserId(), restaurantId, id);
+        public Task<MenuModel> Delete(int id) => _menuAppService.Delete(User.GetUserId(), id);
     }
 }
