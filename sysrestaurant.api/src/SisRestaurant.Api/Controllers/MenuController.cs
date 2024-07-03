@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SisRestaurant.Core.AppServices;
 using SisRestaurant.Core.Extensions;
 using SisRestaurant.Models.Menus;
@@ -6,7 +7,7 @@ using SisRestaurant.Models.Menus;
 namespace SisRestaurant.Api.Controllers
 {
     [ApiController]
-    [Route("api/v1/[controller]")]
+    [Route("api/v1/Restaurant/{restaurantId}/[controller]")]
     public class MenuController : ControllerBase
     {
         private readonly MenuAppService _menuAppService;
@@ -14,12 +15,15 @@ namespace SisRestaurant.Api.Controllers
         public MenuController(MenuAppService menuAppService)
         {
             _menuAppService = menuAppService;
-        }
+        } 
 
         [HttpPost]
-        public Task Post(CreateMenuModel create) => _menuAppService.Create(User.GetUserId(), create);
+        public Task Post(int restaurantId, CreateMenuModel create) => _menuAppService.Create(User.GetUserId(), restaurantId, create);
 
-        [HttpGet("{menuId}")]
-        public Task Get(int menuId) => _menuAppService.Get(menuId);
+        [HttpGet("{id}")]
+        public Task Get(int restaurantId, int id) => _menuAppService.Get(id);
+
+        [HttpDelete("{id}")]
+        public Task Delete(int restaurantId, int id) => _menuAppService.Delete(User.GetUserId(), restaurantId, id);
     }
 }

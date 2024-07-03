@@ -2,9 +2,9 @@
 
 public class Entity
 {
-    public int Id { get; set; }
+    public int Id { get; private set; }
 
-    public DateTime CreatedAt { get; set; }
+    public DateTime CreatedAt { get; private set; }
 
     public Entity()
     {

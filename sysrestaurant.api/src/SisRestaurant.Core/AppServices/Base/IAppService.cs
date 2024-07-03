@@ -2,5 +2,4 @@
 
 public interface IAppService<TCreate, TGet, TID> : IBasicAppService<TGet, TID>
 {
-    Task<TGet> Create(string userId, TCreate create);
 }

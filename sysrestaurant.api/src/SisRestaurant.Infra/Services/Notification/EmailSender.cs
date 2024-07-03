@@ -21,11 +21,6 @@ namespace SisRestaurant.Infra.Services.Notification
         {
             ArgumentException.ThrowIfNullOrWhiteSpace(user.Email);
 
-            _smtpClient.Host = _appSettings.Mail.Server;
-            _smtpClient.Port = _appSettings.Mail.Port;
-            _smtpClient.EnableSsl = _appSettings.Mail.SSL;
-            _smtpClient.Credentials = new NetworkCredential(_appSettings.Mail.Email, _appSettings.Mail.Password);
-
             return _smtpClient.SendMailAsync(new()
             {
                 Body = message,

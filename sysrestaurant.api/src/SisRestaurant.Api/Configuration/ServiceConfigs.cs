@@ -1,5 +1,9 @@
 ﻿using Hangfire;
+using Microsoft.Extensions.Options;
 using SisRestaurant.Infra.Services.Notification;
+using SisRestaurant.Models;
+using System.Net;
+using System.Net.Mail;
 
 namespace SisRestaurant.Api.Configuration
 {
@@ -20,6 +24,17 @@ namespace SisRestaurant.Api.Configuration
             builder.Services.AddHangfireServer();
 
             builder.Services.AddScoped<INotificationSender, EmailSender>();
+
+            builder.Services.AddScoped(s =>
+            {
+                var appsSettings = s.GetRequiredService<IOptions<AppSettings>>().Value;
+
+                return new SmtpClient(appsSettings.Mail.Server, appsSettings.Mail.Port)
+                {
+                    Credentials = new NetworkCredential(appsSettings.Mail.Email, appsSettings.Mail.Password),
+                    EnableSsl = appsSettings.Mail.SSL
+                };
+            });
 
             return builder;
         }

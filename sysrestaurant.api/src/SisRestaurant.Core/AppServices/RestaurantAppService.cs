@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Microsoft.EntityFrameworkCore;
 using SisRestaurant.Core.AppServices.Base;
 using SisRestaurant.Infra.Domain;
 using SisRestaurant.Infra.Domain.Reservations;
@@ -34,9 +35,11 @@ public class RestaurantAppService : BaseAppService, IAppService<CreateRestaurant
         return Mapper.Map<RestaurantModel>(restaurant);
     }
 
-    public async Task<RestaurantModel> Delete(int id)
+    public async Task<RestaurantModel> Delete(string userId, int id)
     {
-        var restaurant = await Db.Restaurants.GetFirstByIdOrError(id);
+        var user = await Db.Users.GetUserWithRestaurant(userId, id);
+
+        var restaurant = user.GetRestaurant(id);
 
         restaurant.Delete();
         
@@ -56,11 +59,53 @@ public class RestaurantAppService : BaseAppService, IAppService<CreateRestaurant
         return Mapper.Map<RestaurantModel>(restaurant);
     }
 
+    public Task<List<ShortRestaurantModel>> Filter(FilterRestaurantModel filter)
+    {
+        var query = Db.Restaurants.Active();
+
+        if (!string.IsNullOrEmpty(filter.Name))
+            query = query.ContainsName(filter.Name);
+
+        if(filter.Open.HasValue)
+            query = query.Where(q => q.Open == filter.Open.Value);
+
+        if(filter.Category != null && filter.Category.Count != 0)
+            query = query.HasItemInCategory(filter.Category);
+
+        return query
+            .Skip(filter.Skip)
+            .Take(filter.Take)
+            .ProjectTo<ShortRestaurantModel>(Mapper.ConfigurationProvider)
+            .ToListAsync();
+    }
+
     public Task<RestaurantModel> Get(int id)
     {
         return Db.Restaurants
             .GetById(id)
             .ProjectTo<RestaurantModel>(Mapper.ConfigurationProvider)
             .FirstOrErrorAsync();
+    }
+
+    public Task<List<RestaurantModel>> GetAll(string userId)
+    {
+        return Db.Restaurants
+            .GetByUser(userId)
+            .ProjectTo<RestaurantModel>(Mapper.ConfigurationProvider)
+            .ToListAsync();
+    }
+
+    public async Task<RestaurantModel> Update(string userId, int restaurantId, UpdateRestaurantModel update)
+    {
+        var user = await Db.Users.GetUserWithRestaurant(userId, restaurantId);
+
+        var restaurant = user.GetRestaurant(restaurantId);
+
+        if (update.Open.HasValue)
+            restaurant.SetOpen(update.Open.Value);
+
+        await Db.SaveChangesAsync();
+
+        return Mapper.Map<RestaurantModel>(restaurant);
     }
 }

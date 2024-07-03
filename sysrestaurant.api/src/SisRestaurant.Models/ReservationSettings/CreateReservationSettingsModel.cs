@@ -5,8 +5,10 @@ namespace SisRestaurant.Models.ReservationSettings
     public class CreateReservationSettingsModel : IValidatableObject
     {
         public bool PaymentRequired { get; set; }
-        public TimeSpan StartAt { get; set; }        
-        public TimeSpan FinishAt { get; set; }
+
+        public TimeOnly StartAt { get; set; }
+
+        public TimeOnly FinishAt { get; set; }
 
         [Range(0, int.MaxValue)]
         public int Capacity { get; set; }

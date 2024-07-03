@@ -7,6 +7,9 @@ namespace SisRestaurant.Infra.Domain.Menus;
 public class Menu : SoftDelete
 {
     [Required]
+    public string Name { get; set; }
+
+    [Required]
     public Restaurant Restaurant { get; set; }
 
     [Required]
@@ -14,11 +17,13 @@ public class Menu : SoftDelete
 
     protected Menu() { }
 
-    public Menu(List<MenuItem> items, Restaurant restaurant)
+    public Menu(string name, List<MenuItem> items, Restaurant restaurant)
     {
         if(items.Count == 0) throw new ArgumentException("EmptyItems");
         ArgumentNullException.ThrowIfNull(restaurant);
+        ArgumentException.ThrowIfNullOrEmpty(name, "Name");
 
+        Name = name;
         Items = items;
     }
 

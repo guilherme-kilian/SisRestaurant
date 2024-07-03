@@ -20,18 +20,18 @@ namespace SisRestaurant.Core.AppServices
             _menuItemAppService = menuItemAppService;
         }
 
-        public async Task<MenuModel> Create(string userId, CreateMenuModel create)
+        public async Task<MenuModel> Create(string userId, int restaurantId, CreateMenuModel create)
         {
-            var user = await Db.Users.GetUserWithRestaurant(userId, create.RestaurantId);
+            var user = await Db.Users.GetUserWithRestaurant(userId, restaurantId);
 
             var menuItems = new List<MenuItem>();
 
             foreach (var item in create.Items)
                 menuItems.Add(await _menuItemAppService.Create(item));
 
-            var restaurant = user.Restaurants.First(r => r.Id == create.RestaurantId);
+            var restaurant = user.Restaurants.First(r => r.Id == restaurantId);
 
-            var menu = new Menu(menuItems, restaurant);
+            var menu = new Menu(create.Name, menuItems, restaurant);
 
             Db.Menus.Add(menu);
 
@@ -44,8 +44,7 @@ namespace SisRestaurant.Core.AppServices
         {
             var user = await Db.Users.GetUserWithRestaurant(userId, menuId);
 
-            var restaurant = user.Restaurants
-                .First(i => i.Id == restaurantId);
+            var restaurant = user.Restaurants.First(i => i.Id == restaurantId);
 
             var menu = restaurant.GetMenu(menuId) ?? throw new InvalidOperationException("MenuNotFound");
 

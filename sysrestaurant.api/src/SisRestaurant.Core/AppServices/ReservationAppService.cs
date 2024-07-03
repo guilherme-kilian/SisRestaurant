@@ -31,5 +31,18 @@ namespace SisRestaurant.Core.AppServices
                 .ProjectTo<ReservationModel>(Mapper.ConfigurationProvider)
                 .FirstOrErrorAsync();
         }
+
+        public async Task<ReservationModel> Delete(string userId, int id)
+        {
+            var user = await Db.Users.GetUserWithReservations(userId, id);
+
+            var reservation = user.GetReservation(id);
+
+            reservation.Delete();
+
+            await Db.SaveChangesAsync();
+
+            return Mapper.Map<ReservationModel>(reservation);
+        }
     }
 }

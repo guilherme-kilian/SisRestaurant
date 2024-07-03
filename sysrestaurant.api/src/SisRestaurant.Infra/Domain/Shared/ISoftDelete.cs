@@ -3,6 +3,6 @@
 public interface ISoftDelete
 {
     bool Deleted { get; }
-    DateTime DeletedAt { get; }
+    DateTime? DeletedAt { get; }
     void Delete();
 }

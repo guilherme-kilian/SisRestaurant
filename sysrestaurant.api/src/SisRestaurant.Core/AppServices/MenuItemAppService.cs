@@ -41,6 +41,16 @@ namespace SisRestaurant.Core.AppServices
                 .FirstOrErrorAsync();
         }
 
+        public Task<MenuItemModel> Get(int menuId, int id)
+        {
+            return Db.MenuItems
+                .OfMenu(menuId)
+                .GetById(id)
+                .ProjectTo<MenuItemModel>(Mapper.ConfigurationProvider)
+                .FirstOrErrorAsync();
+        }
+
+
         public async Task<MenuItemModel> AddItem(int menuId, CreateMenuItemModel create)
         {
             var menu = await Db.Menus

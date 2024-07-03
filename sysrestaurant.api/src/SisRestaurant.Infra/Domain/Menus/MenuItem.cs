@@ -18,6 +18,9 @@ public class MenuItem : SoftDelete
     [Required]
     public Category Category { get; private set; }
 
+    [Required]
+    public Menu Menu { get; private set; }
+
     protected MenuItem() { }
 
     public MenuItem(string name, double price, string product, Category category)

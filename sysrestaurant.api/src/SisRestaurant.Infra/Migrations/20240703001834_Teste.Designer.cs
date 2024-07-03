@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SisRestaurant.Infra.Domain;
 
@@ -11,9 +12,11 @@ using SisRestaurant.Infra.Domain;
 namespace SisRestaurant.Infra.Migrations
 {
     [DbContext(typeof(SisRestaurantContext))]
-    partial class SisRestaurantContextModelSnapshot : ModelSnapshot
+    [Migration("20240703001834_Teste")]
+    partial class Teste
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -216,10 +219,6 @@ namespace SisRestaurant.Infra.Migrations
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RestaurantId")
                         .HasColumnType("int");
@@ -618,7 +617,7 @@ namespace SisRestaurant.Infra.Migrations
             modelBuilder.Entity("SisRestaurant.Infra.Domain.Reservations.Reservation", b =>
                 {
                     b.HasOne("SisRestaurant.Infra.Domain.Users.User", "Customer")
-                        .WithMany("Reservations")
+                        .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -660,11 +659,6 @@ namespace SisRestaurant.Infra.Migrations
                 {
                     b.Navigation("Menus");
 
-                    b.Navigation("Reservations");
-                });
-
-            modelBuilder.Entity("SisRestaurant.Infra.Domain.Users.User", b =>
-                {
                     b.Navigation("Reservations");
                 });
 #pragma warning restore 612, 618

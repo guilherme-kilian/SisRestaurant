@@ -51,7 +51,7 @@ public class Restaurant : SoftDelete
 
     public Reservation Reserve(DateTime reservationDate, User user, int count, Payment? payment = null, string? details = null)
     {
-        if (reservationDate.Hour < Settings.StartAt.Hours || reservationDate.Hour > Settings.FinishAt.Hours)
+        if (reservationDate.Hour < Settings.StartAt.Hour || reservationDate.Hour > Settings.FinishAt.Hour)
             throw new InvalidOperationException("RestaurantIsClosed");
 
         var reservations = Reservations
@@ -76,5 +76,10 @@ public class Restaurant : SoftDelete
     public Menu GetMenu(int menuId)
     {
         return Menus.First(i => i.Id == menuId && !i.Deleted);
+    }
+
+    public void SetOpen(bool value)
+    {
+        Open = value;
     }
 }

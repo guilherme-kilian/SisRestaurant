@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SisRestaurant.Core.AppServices;
 using SisRestaurant.Models.MenuItems;
 
 namespace SisRestaurant.Api.Controllers
 {
     [ApiController]
-    [Route("api/v1/menu/{menuId}/[controller]")]
+    [Route("api/v1/Menu/{menuId}/[controller]")]
     public class MenuItemController : ControllerBase
     {
         private readonly MenuItemAppService _menuItemAppService;
@@ -21,10 +22,16 @@ namespace SisRestaurant.Api.Controllers
             return _menuItemAppService.AddItem(menuId, create);
         }
 
-        [HttpDelete("{menuItemId}")]
-        public Task<MenuItemModel> RemoveItem(int menuId, int menuItemId)
+        [HttpGet("{id}")]
+        public Task<MenuItemModel> GetItem(int menuId, int id)
         {
-            return _menuItemAppService.RemoveItem(menuId, menuItemId);
+            return _menuItemAppService.Get(menuId, id);
+        }
+
+        [HttpDelete("{id}")]
+        public Task<MenuItemModel> RemoveItem(int menuId, int id)
+        {
+            return _menuItemAppService.RemoveItem(menuId, id);
         }
     }
 }

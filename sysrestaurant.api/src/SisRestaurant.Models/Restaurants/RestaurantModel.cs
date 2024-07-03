@@ -11,9 +11,9 @@ public class RestaurantModel
     public required string Name { get; set; }
     public required string Email { get; set; }
     public required string PhoneNumber { get; set; }
-    public required MenuModel Menu { get; set; }
+    public required List<MenuModel> Menus { get; set; }
     public required ReservationSettingsModel Settings { get; set; }
     public List<ReservationModel> Reservations { get; set; } = [];
-    public required UserModel User { get; set; }
+    public required List<UserModel> Users { get; set; }
     public bool Open { get; set; }
 }

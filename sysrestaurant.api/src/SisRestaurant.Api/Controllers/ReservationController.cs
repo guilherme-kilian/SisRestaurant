@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SisRestaurant.Core.AppServices;
 using SisRestaurant.Core.Extensions;
 using SisRestaurant.Models.Reservations;
@@ -23,5 +24,9 @@ namespace SisRestaurant.Api.Controllers
         [HttpGet("{id}")]
         public Task<ReservationModel> Get(int id) => 
             _reservationAppService.Get(id);
+
+        [HttpDelete("{id}")]
+        public Task<ReservationModel> Delete(int id) =>
+            _reservationAppService.Delete(User.GetUserId(), id);
     }
 }
