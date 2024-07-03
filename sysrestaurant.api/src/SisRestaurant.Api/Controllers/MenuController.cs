@@ -18,12 +18,12 @@ namespace SisRestaurant.Api.Controllers
         } 
 
         [HttpPost]
-        public Task Post(int restaurantId, CreateMenuModel create) => _menuAppService.Create(User.GetUserId(), restaurantId, create);
+        public Task<MenuModel> Post(int restaurantId, CreateMenuModel create) => _menuAppService.Create(User.GetUserId(), restaurantId, create);
 
         [HttpGet("{id}")]
-        public Task Get(int restaurantId, int id) => _menuAppService.Get(id);
+        public Task<MenuModel> Get(int restaurantId, int id) => _menuAppService.Get(id);
 
         [HttpDelete("{id}")]
-        public Task Delete(int restaurantId, int id) => _menuAppService.Delete(User.GetUserId(), restaurantId, id);
+        public Task<MenuModel> Delete(int restaurantId, int id) => _menuAppService.Delete(User.GetUserId(), restaurantId, id);
     }
 }

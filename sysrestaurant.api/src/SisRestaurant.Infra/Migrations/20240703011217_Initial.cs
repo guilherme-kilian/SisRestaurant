@@ -109,8 +109,8 @@ namespace SisRestaurant.Infra.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PaymentRequired = table.Column<bool>(type: "bit", nullable: false),
-                    StartAt = table.Column<TimeSpan>(type: "time", nullable: false),
-                    FinishAt = table.Column<TimeSpan>(type: "time", nullable: false),
+                    StartAt = table.Column<TimeOnly>(type: "time", nullable: false),
+                    FinishAt = table.Column<TimeOnly>(type: "time", nullable: false),
                     Capacity = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -257,6 +257,7 @@ namespace SisRestaurant.Infra.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RestaurantId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Deleted = table.Column<bool>(type: "bit", nullable: false),
@@ -345,7 +346,7 @@ namespace SisRestaurant.Infra.Migrations
                     Price = table.Column<double>(type: "float", nullable: false),
                     Product = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
-                    MenuId = table.Column<int>(type: "int", nullable: true),
+                    MenuId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Deleted = table.Column<bool>(type: "bit", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
@@ -363,7 +364,8 @@ namespace SisRestaurant.Infra.Migrations
                         name: "FK_MenuItems_Menus_MenuId",
                         column: x => x.MenuId,
                         principalTable: "Menus",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

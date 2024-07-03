@@ -12,7 +12,6 @@ public class Menu : SoftDelete
     [Required]
     public Restaurant Restaurant { get; set; }
 
-    [Required]
     public List<MenuItem> Items { get; set; }
 
     protected Menu() { }
@@ -23,6 +22,7 @@ public class Menu : SoftDelete
         ArgumentNullException.ThrowIfNull(restaurant);
         ArgumentException.ThrowIfNullOrEmpty(name, "Name");
 
+        Restaurant = restaurant;
         Name = name;
         Items = items;
     }

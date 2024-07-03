@@ -12,7 +12,7 @@ using SisRestaurant.Infra.Domain;
 namespace SisRestaurant.Infra.Migrations
 {
     [DbContext(typeof(SisRestaurantContext))]
-    [Migration("20240702233646_Initial")]
+    [Migration("20240703011217_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -220,6 +220,10 @@ namespace SisRestaurant.Infra.Migrations
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("RestaurantId")
                         .HasColumnType("int");
 
@@ -250,7 +254,7 @@ namespace SisRestaurant.Infra.Migrations
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("MenuId")
+                    b.Property<int>("MenuId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -387,13 +391,13 @@ namespace SisRestaurant.Infra.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<TimeSpan>("FinishAt")
+                    b.Property<TimeOnly>("FinishAt")
                         .HasColumnType("time");
 
                     b.Property<bool>("PaymentRequired")
                         .HasColumnType("bit");
 
-                    b.Property<TimeSpan>("StartAt")
+                    b.Property<TimeOnly>("StartAt")
                         .HasColumnType("time");
 
                     b.HasKey("Id");
@@ -603,17 +607,21 @@ namespace SisRestaurant.Infra.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SisRestaurant.Infra.Domain.Menus.Menu", null)
+                    b.HasOne("SisRestaurant.Infra.Domain.Menus.Menu", "Menu")
                         .WithMany("Items")
-                        .HasForeignKey("MenuId");
+                        .HasForeignKey("MenuId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Category");
+
+                    b.Navigation("Menu");
                 });
 
             modelBuilder.Entity("SisRestaurant.Infra.Domain.Reservations.Reservation", b =>
                 {
                     b.HasOne("SisRestaurant.Infra.Domain.Users.User", "Customer")
-                        .WithMany()
+                        .WithMany("Reservations")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -655,6 +663,11 @@ namespace SisRestaurant.Infra.Migrations
                 {
                     b.Navigation("Menus");
 
+                    b.Navigation("Reservations");
+                });
+
+            modelBuilder.Entity("SisRestaurant.Infra.Domain.Users.User", b =>
+                {
                     b.Navigation("Reservations");
                 });
 #pragma warning restore 612, 618
