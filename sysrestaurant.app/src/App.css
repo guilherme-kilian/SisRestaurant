@@ -1,69 +1,38 @@
-/* src/App.css */
-
-/* Estilos globais para o corpo da página */
-body {
-  font-family: 'Roboto', sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f0f0f0; /* Cor de fundo global */
-  color: #333333; /* Cor do texto global */
+.App {
+  text-align: center;
 }
 
-/* Container principal da aplicação */
-.App {
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  padding: 20px;
+  font-size: calc(10px + 2vmin);
+  color: white;
 }
 
-/* Estilos para links */
-a {
-  color: #007bff; /* Cor padrão para links */
-  text-decoration: none;
+.App-link {
+  color: #61dafb;
 }
 
-a:hover {
-  text-decoration: underline; /* Sublinhado ao passar o mouse */
-}
-
-/* Estilos para cabeçalho */
-header {
-  background-color: #ffffff; /* Cor de fundo do cabeçalho */
-  padding: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-/* Logo no cabeçalho */
-.App-logo {
-  height: 40px;
-  pointer-events: none;
-}
-
-/* Estilos para conteúdo */
-.content {
-  max-width: 800px; /* Largura máxima do conteúdo */
-  width: 100%;
-  margin-top: 20px;
-  padding: 20px;
-  background-color: #ffffff; /* Fundo branco para o conteúdo */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
-  border-radius: 8px;
-}
-
-/* Estilos para rodapé */
-footer {
-  background-color: #ffffff; /* Cor de fundo do rodapé */
-  padding: 10px;
-  text-align: center;
-  width: 100%;
-  position: fixed;
-  bottom: 0;
-  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

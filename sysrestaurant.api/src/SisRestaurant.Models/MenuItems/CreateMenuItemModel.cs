@@ -7,7 +7,7 @@ namespace SisRestaurant.Models.MenuItems
         [MinLength(5)]
         public required string Name { get; set; }
 
-        [MinLength(5)]
+        [MinLength(2)]
         public required string Product { get; set; }
 
         [Range(0, double.MaxValue)]
