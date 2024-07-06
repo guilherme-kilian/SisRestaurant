@@ -5,12 +5,12 @@ namespace SisRestaurant.Infra.Domain.Reservations;
 
 public class ReservationSettings : Entity
 {
-    public bool PaymentRequired { get; set; }        
-    public TimeOnly StartAt { get; set; }
-    public TimeOnly FinishAt { get; set; }
+    public bool PaymentRequired { get; private set; }        
+    public TimeOnly StartAt { get; private set; }
+    public TimeOnly FinishAt { get; private set; }
     
     [Range(0, int.MaxValue)]
-    public int Capacity { get; set; }
+    public int Capacity { get; private set; }
 
     protected ReservationSettings() { }
 

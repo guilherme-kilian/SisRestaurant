@@ -1,4 +1,4 @@
-class UserModel{
+export class UserModel{
     id: string
     email: string
     userName: string
@@ -11,5 +11,3 @@ class UserModel{
         this.name = name;
     }
 }
-
-export default UserModel;
