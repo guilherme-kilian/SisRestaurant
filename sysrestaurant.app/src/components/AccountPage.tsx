@@ -6,7 +6,6 @@ import CreateUserModel from "../models/User/CreateUserModel";
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
-
   const [creatingUser, setCreatingUser] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -24,7 +23,7 @@ const LoginPage: React.FC = () => {
     const loginPayload = new LoginModel(email, password);
     await logIn(loginPayload);
 
-    navigate("/");
+    window.location.reload();
   }
 
   return (
