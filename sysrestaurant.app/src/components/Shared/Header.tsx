@@ -7,8 +7,7 @@ const Header : React.FC = () => {
             <h1 className="text-center mt-3 mb-4">Restaurantes Disponíveis</h1>
             <div className="header-links">
                 <a href="#">Página Inicial</a> |
-                <a href="#">Login</a> |
-                <a href="#">Cadastrar Restaurante</a>
+                <a href="/restaurants/create">Cadastrar Restaurante</a>
             </div>
         </div>
     </header>)

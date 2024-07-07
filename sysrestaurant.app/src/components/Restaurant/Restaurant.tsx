@@ -1,12 +1,14 @@
 import { ShortRestaurantModel } from "../../models/Restaurant/ShortRestaurantModel";
+import "./Restaurant.css";
 
-const Restaurant : React.FC<ShortRestaurantModel> = (props) => {
+const Restaurant : React.FC<{ item: ShortRestaurantModel, click: (id: number) => void }> = (props) => {
     return <>
             <div className="restaurant-item">
-                <img src={props.picture} alt={props.name} />
+                <img src={props.item.picture} alt={props.item.name} />
                 <div className="restaurant-info">
-                    <h5 className="card-title">{props.name}</h5>
-                    <a href="churrascaria.html" className="btn btn-primary">Ver Mais</a>
+                    <h5 className="card-title">{props.item.name}</h5>
+                    <p className="card-text">{props.item.description}</p>
+                    <a href="#" onClick={() => props.click(props.item.id)} className="btn btn-primary">Ver Mais</a>
                 </div>
             </div>
     </>

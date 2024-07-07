@@ -1,5 +1,5 @@
 import { MenuItemModel } from "../../models/MenuItem/MenuItemModel";
-
+import "./MenuItem.css";
 const MenuItem : React.FC<MenuItemModel> = (props) => {
     return <>
     <div className="restaurant-item">

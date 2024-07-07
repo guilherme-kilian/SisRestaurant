@@ -12,8 +12,8 @@ using SisRestaurant.Infra.Domain;
 namespace SisRestaurant.Infra.Migrations
 {
     [DbContext(typeof(SisRestaurantContext))]
-    [Migration("20240707181721_descriptip")]
-    partial class descriptip
+    [Migration("20240707191603_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

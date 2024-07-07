@@ -1,4 +1,4 @@
-import { FormEvent, useRef, useState } from "react";
+import { FormEvent } from "react";
 import { CreateReservationModel } from "../../models/Reservation/CreateReservationModel";
 import "./ReservationPage.css";
 import { useParams } from "react-router-dom";
@@ -18,16 +18,18 @@ const ReservationPage : React.FC = () => {
 
         var obj = Object.fromEntries(data.entries());
 
-        var date = obj.date;
-        var count = obj.count;
-        var details = obj.details;
+        var date = obj.date.toString();
+        var count = obj.count.toString();
+        var details = obj.details.toString();
 
         if(!date || !count || !details) return;
 
         if(!id) return;
 
-        // var create = new CreateReservationModel(parseInt(id), realDate!, parseInt(count!), details!,)
-        // await createReservation(create);
+        var realDate = new Date(date);
+
+        var create = new CreateReservationModel(parseInt(id), realDate!, parseInt(count!), details!,)
+        await createReservation(create);
     }
 
     return <>

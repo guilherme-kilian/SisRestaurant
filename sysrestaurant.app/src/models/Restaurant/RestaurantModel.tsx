@@ -13,8 +13,9 @@ export class RestaurantModel {
     users: UserModel[]
     open: boolean
     picture: string
-    
-    constructor (id: number, name: string, email: string, phoneNumber: string, menus: MenuModel[], settings: ReservationSettingsModel, reservations: ReservationModel[], users: UserModel[], open: boolean, picture: string){
+    description: string
+
+    constructor (id: number, name: string, email: string, phoneNumber: string, menus: MenuModel[], settings: ReservationSettingsModel, reservations: ReservationModel[], users: UserModel[], open: boolean, picture: string, description: string){
         this.id = id;
         this.name = name;
         this.email = email;
@@ -25,6 +26,7 @@ export class RestaurantModel {
         this.users = users;
         this.open = open;
         this.picture = picture;
+        this.description = description;
     }
 }
 

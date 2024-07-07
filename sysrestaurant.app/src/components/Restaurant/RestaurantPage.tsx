@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { RestaurantModel } from "../../models/Restaurant/RestaurantModel";
 import { getRestaurant } from "../../services/sisRestaurantApi";
 import Menu from "../Menu/Menu";
+import HeaderRestaurant from "../Shared/HeaderRestaurant";
 const RestaurantPage : React.FC = () => {
 
     const [ restaurant, setRestaurant ] = useState<RestaurantModel>();
@@ -20,27 +21,29 @@ const RestaurantPage : React.FC = () => {
             let restaurant = await getRestaurant(parseInt(id));
             setRestaurant(() => restaurant);
         }
+
+        fetchRestaurant();
     }, [ id ])
 
     return <>
-        <Header />
+
+        { !restaurant ? "Carregando..." : 
+            <HeaderRestaurant restaurantName={restaurant.name}/>
+        }        
         <div className="container">
         <div className="restaurant-list">
 
             {!restaurant ? "Carregando..." : 
-            restaurant.menus.map(m => 
-                <Menu {...m} />
-            )
-
+                restaurant.menus.map(m => <Menu {...m} />)
             }
-            <div className="restaurant-item">
+            {/*<div className="restaurant-item">
                 <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cmVzdGF1cmFudCUyMGZvb2QlMjBiYXJiZWN1ZXxlbnwwfHwwfHx8MA%3D%3D" alt="Entradas" />
                 <div className="restaurant-info">
                     <h5 className="card-title">Entradas</h5>
                     <p className="card-text">Variedade de entradas deliciosas.</p>
                 </div>
             </div>
-            {/* <!-- Cardápio 2: Pratos Principais -->
+             <!-- Cardápio 2: Pratos Principais -->
             <div class="restaurant-item">
                 <img src="https://images.unsplash.com/photo-1644704265419-96ddaf628e71?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHN0ZWFraG91c2V8ZW58MHx8MHx8fDA%3D">
                 <div class="restaurant-info">

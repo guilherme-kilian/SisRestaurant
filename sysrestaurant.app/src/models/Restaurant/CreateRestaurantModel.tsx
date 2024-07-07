@@ -3,12 +3,16 @@ export class CreateRestaurantModel{
     phoneNumber: string
     email: string
     settings: CreateReservationSettingsModel
+    picture: string
+    details: string
 
-    constructor (name: string, phoneNumber: string, email: string, settings: CreateReservationSettingsModel){
+    constructor (name: string, phoneNumber: string, email: string, settings: CreateReservationSettingsModel, picture: string, details: string){
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.settings = settings;
+        this.picture = picture;
+        this.details = details;
     }
 }
 

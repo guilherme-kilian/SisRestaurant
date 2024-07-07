@@ -5,23 +5,30 @@ import Header from "../Shared/Header";
 import { ShortRestaurantModel } from "../../models/Restaurant/ShortRestaurantModel";
 import { FilterRestaurantModel } from "../../models/Restaurant/FilterRestaurantModel";
 import Restaurant from "../Restaurant/Restaurant";
+import { useNavigate } from "react-router-dom";
 
 const HomePage: React.FC = () => {
-  const [restaurants, setRestaurants] = useState<ShortRestaurantModel[]>();
+    const [restaurants, setRestaurants] = useState<ShortRestaurantModel[]>();
+    const navigator = useNavigate();
 
-  useEffect(() => {    
-    async function fetchRestaurants(){
-      let restaurants = await filterRestaurant(new FilterRestaurantModel(null, null, true));
-      setRestaurants(() => restaurants);
+    function redirectToRestaurant(id: number){
+        navigator('/restaurants/' + id);
     }
-    fetchRestaurants();
-  }, []);
+
+    useEffect(() => {    
+        async function fetchRestaurants() {
+            let restaurants = await filterRestaurant(new FilterRestaurantModel(null, null, true));
+            setRestaurants(() => restaurants);
+        }
+        
+        fetchRestaurants();
+    }, []);
 
   return <>
     <Header/>    
     <div className="container">
         { restaurants?.map((restaurant) => 
-            <Restaurant {...restaurant} />
+            <Restaurant item={restaurant} click={redirectToRestaurant} />
         )}
         
             {/* <div class="restaurant-item">
