@@ -16,5 +16,7 @@ namespace SisRestaurant.Models.MenuItems
         public required string CategoryName { get; set; }
 
         public string? Picture { get; set; }
+
+        public required string Description { get; set; }
     }
 }

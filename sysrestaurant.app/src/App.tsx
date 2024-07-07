@@ -20,6 +20,11 @@ export default function App() {
             <RestaurantPage  />
           </RequireAuth>
         } /> 
+        <Route path="/restaurants/:id/reservation" element={
+          <RequireAuth>
+            <RestaurantPage  />
+          </RequireAuth>
+        } /> 
       </Routes>
     </BrowserRouter>
   );

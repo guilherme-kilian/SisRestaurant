@@ -16,4 +16,7 @@ public class RestaurantModel
     public List<ReservationModel> Reservations { get; set; } = [];
     public required List<UserModel> Users { get; set; }
     public bool Open { get; set; }
+    public required string Picture { get; set; }
+
+    public required string Description { get; set; }
 }

@@ -23,18 +23,23 @@ public class MenuItem : SoftDelete
     
     public string? Picture { get; set; }
 
+    [Required]
+    public string Description { get; set; }
+
     protected MenuItem() { }
 
-    public MenuItem(string name, double price, string product, Category category, string? picture)
+    public MenuItem(string name, double price, string product, Category category, string? picture, string description)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(name);
         ArgumentException.ThrowIfNullOrWhiteSpace(product);
         ArgumentOutOfRangeException.ThrowIfNegative(price);
+        ArgumentException.ThrowIfNullOrEmpty(description);
 
         Product = product;
         Name = name;
         Price = price;
         Category = category;
         Picture = picture;
+        Description = description;
     }
 }

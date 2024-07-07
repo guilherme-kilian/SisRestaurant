@@ -1,60 +1,29 @@
 import React, { useState, useEffect } from "react";
-import { UserModel } from "../../models/User/UserModel";
-import { getUser } from "../../services/sisRestaurantApi";
+import { filterRestaurant, getUser } from "../../services/sisRestaurantApi";
 import "./HomePage.css";
 import Header from "../Shared/Header";
+import { ShortRestaurantModel } from "../../models/Restaurant/ShortRestaurantModel";
+import { FilterRestaurantModel } from "../../models/Restaurant/FilterRestaurantModel";
+import Restaurant from "../Restaurant/Restaurant";
 
 const HomePage: React.FC = () => {
-  const [data, setData] = useState<UserModel>();
+  const [restaurants, setRestaurants] = useState<ShortRestaurantModel[]>();
 
-  useEffect(() => {
-    
-    async function fetchUser(){
-      let user = await getUser();
-      setData(() => user);
+  useEffect(() => {    
+    async function fetchRestaurants(){
+      let restaurants = await filterRestaurant(new FilterRestaurantModel(null, null, true));
+      setRestaurants(() => restaurants);
     }
-
-    if (data === undefined || data === null) {
-      fetchUser();
-    }
-  });
-
-  // let scrollValue = 0;
-  // const restaurantList = document.querySelector('.restaurant-list');
-
-  // function moveLeft() {
-  //     if (scrollValue > 0) {
-  //         scrollValue -= restaurantList.offsetWidth / 3; // Desloca 1/3 da largura da lista
-  //         if (scrollValue < 0) {
-  //             scrollValue = 0;
-  //         }
-  //         restaurantList.style.transform = `translateX(-${scrollValue}px)`;
-  //     }
-  // }
-
-  // function moveRight() {
-  //     const maxScroll = restaurantList.scrollWidth - restaurantList.offsetWidth; // Calcula o máximo de deslocamento
-  //     if (scrollValue < maxScroll) {
-  //         scrollValue += restaurantList.offsetWidth / 3; // Desloca 1/3 da largura da lista
-  //         if (scrollValue > maxScroll) {
-  //             scrollValue = maxScroll;
-  //         }
-  //         restaurantList.style.transform = `translateX(-${scrollValue}px)`;
-  //     }
-  // }
+    fetchRestaurants();
+  }, []);
 
   return <>
     <Header/>    
     <div className="container">
-        <div className="restaurant-list">
-            <div className="restaurant-item">
-                <img src='https://images.unsplash.com/photo-1558030006-450675393462?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' alt="Churrascaria" />
-                <div className="restaurant-info">
-                    <h5 className="card-title">Churrascaria do Gaúcho</h5>
-                    <p className="card-text">Carnes suculentas grelhadas na brasa.</p>
-                    <a href="churrascaria.html" className="btn btn-primary">Ver Mais</a>
-                </div>
-            </div>
+        { restaurants?.map((restaurant) => 
+            <Restaurant {...restaurant} />
+        )}
+        
             {/* <div class="restaurant-item">
                 <img src='https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' alt="Sushi">
                 <div class="restaurant-info">
@@ -95,7 +64,6 @@ const HomePage: React.FC = () => {
                     <a href="cafe.html" class="btn btn-primary">Ver Mais</a>
                 </div>
             </div> */}
-        </div>
     </div>
   </> ;
 }

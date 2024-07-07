@@ -26,7 +26,7 @@ public class RestaurantAppService : BaseAppService, IAppService<CreateRestaurant
             create.Settings.FinishAt, 
             create.Settings.Capacity);
 
-        var restaurant = new Restaurant(create.Name, create.Email, create.PhoneNumber, settings, user);
+        var restaurant = new Restaurant(create.Name, create.Email, create.PhoneNumber, settings, user, create.Picture, create.Description);
 
         Db.Restaurants.Add(restaurant);
 

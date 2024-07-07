@@ -22,5 +22,6 @@ public class MappingProfile : Profile
         CreateMap<Menu, MenuModel>();
         CreateMap<Reservation, ReservationModel>();
         CreateMap<ReservationSettings, ReservationSettingsModel>();
+        CreateMap<Restaurant, ShortRestaurantModel>();
     }
 }

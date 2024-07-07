@@ -12,6 +12,7 @@ import { MenuItemModel } from "../models/MenuItem/MenuItemModel";
 import { CreateMenuItemModel } from "../models/MenuItem/CreateMenuItemModel";
 import { ReservationModel } from "../models/Reservation/ReservationModel";
 import { CreateReservationModel } from "../models/Reservation/CreateReservationModel";
+import { ShortRestaurantModel } from "../models/Restaurant/ShortRestaurantModel";
 
 var baseAddress: string = 'https://localhost:7000/api/v1';
 
@@ -77,7 +78,7 @@ export async function createRestaurant(model: CreateRestaurantModel): Promise<Re
     return request.data;
 }
 
-export async function filterRestaurant(model: FilterRestaurantModel): Promise<RestaurantModel[]>{
+export async function filterRestaurant(model: FilterRestaurantModel): Promise<ShortRestaurantModel[]>{
     let queryString = model.getQueryString();
     var request = await axios.get<RestaurantModel[]>(`${baseAddress}/restaurant/filter${queryString}`)
     return request.data;

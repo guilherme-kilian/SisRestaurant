@@ -27,7 +27,13 @@ public class Restaurant : SoftDelete
 
     public bool Open { get; private set; }
 
-    public List<Reservation> Reservations { get; private set; } = [];    
+    public List<Reservation> Reservations { get; private set; } = [];
+
+    [Required]
+    public string Picture { get; set; }
+
+    [Required]
+    public string Description { get; set; }
 
     protected Restaurant() { }
 
@@ -36,17 +42,24 @@ public class Restaurant : SoftDelete
         string email, 
         string phoneNumber,
         ReservationSettings settings, 
-        User user)
+        User user,
+        string picture,
+        string description)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(name);
         ArgumentException.ThrowIfNullOrWhiteSpace(email);
         ArgumentException.ThrowIfNullOrWhiteSpace(phoneNumber);
+        ArgumentException.ThrowIfNullOrWhiteSpace(picture);
+        ArgumentException.ThrowIfNullOrWhiteSpace(description);
 
         Name = name;
         Email = email;
         PhoneNumber = phoneNumber;
         Settings = settings;
         Users = [user];
+        Picture = picture;
+        Open = true;
+        Description = description;
     }
 
     public Reservation Reserve(DateTime reservationDate, User user, int count, Payment? payment = null, string? details = null)

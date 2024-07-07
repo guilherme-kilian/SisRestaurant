@@ -1,10 +1,39 @@
+import { FormEvent, useRef, useState } from "react";
+import { CreateReservationModel } from "../../models/Reservation/CreateReservationModel";
 import "./ReservationPage.css";
-
+import { useParams } from "react-router-dom";
+import { createReservation } from "../../services/sisRestaurantApi";
 const ReservationPage : React.FC = () => {
+
+    const { id } = useParams();
+
+    if(!id){
+        throw new Error("ID não informado");
+    }       
+
+    async function create(form: FormEvent<HTMLFormElement>) : Promise<void>{
+        form.preventDefault();
+
+        var data = new FormData(form.currentTarget);
+
+        var obj = Object.fromEntries(data.entries());
+
+        var date = obj.date;
+        var count = obj.count;
+        var details = obj.details;
+
+        if(!date || !count || !details) return;
+
+        if(!id) return;
+
+        // var create = new CreateReservationModel(parseInt(id), realDate!, parseInt(count!), details!,)
+        // await createReservation(create);
+    }
+
     return <>
         <div className="container">
         <h2 className="text-center">Reserva de Restaurante</h2>
-        <form action="confirmacao.html" method="post">
+        <form action="confirmacao.html" method="post" onSubmit={create}>
             <div className="form-group">
                 <label htmlFor="date">Data da Reserva:</label>
                 <input type="date" className="form-control" id="date" name="date" required />
@@ -16,14 +45,6 @@ const ReservationPage : React.FC = () => {
             <div className="form-group">
                 <label htmlFor="phone">Telefone:</label>
                 <input type="tel" className="form-control" id="phone" name="phone" required />
-            </div>
-            <div className="form-group">
-                <label htmlFor="name">Nome:</label>
-                <input type="text" className="form-control" id="name" name="name" required />
-            </div>
-            <div className="form-group">
-                <label htmlFor="cpf">CPF:</label>
-                <input type="text" className="form-control" id="cpf" name="cpf" required />
             </div>
             <div className="form-group text-center">
                 <input type="submit" className="btn btn-success" value="Enviar Reserva" />

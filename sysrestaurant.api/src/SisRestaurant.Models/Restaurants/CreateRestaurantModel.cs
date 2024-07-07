@@ -15,4 +15,8 @@ public class CreateRestaurantModel
     public required string PhoneNumber { get; set; }
         
     public required CreateReservationSettingsModel Settings { get; set; }
+
+    public required string Picture { get; set; }
+
+    public required string Description { get; set; }
 }
