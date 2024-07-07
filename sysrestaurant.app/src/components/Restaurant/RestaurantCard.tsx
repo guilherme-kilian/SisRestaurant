@@ -1,7 +1,7 @@
 import { ShortRestaurantModel } from "../../models/Restaurant/ShortRestaurantModel";
-import "./Restaurant.css";
+import "./RestaurantCard.css";
 
-const Restaurant : React.FC<{ item: ShortRestaurantModel, click: (id: number) => void }> = (props) => {
+const RestaurantCard : React.FC<{ item: ShortRestaurantModel, click: (id: number) => void }> = (props) => {
     return <>
             <div className="restaurant-item">
                 <img src={props.item.picture} alt={props.item.name} />
@@ -14,4 +14,4 @@ const Restaurant : React.FC<{ item: ShortRestaurantModel, click: (id: number) =>
     </>
 }
 
-export default Restaurant;
+export default RestaurantCard;

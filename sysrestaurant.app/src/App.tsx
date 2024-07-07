@@ -6,6 +6,7 @@ import RequireAuth from "./components/Shared/RequireAuth";
 import RestaurantPage from "./components/Restaurant/RestaurantPage";
 import ReservationPage from "./components/Reservation/ReservationPage";
 import CreateRestaurantPage from "./components/Restaurant/Create/CreateRestaurantPage";
+import CreateMenuItem from "./components/MenuItem/Create/CreateMenuItem";
 
 export default function App() {
   return (
@@ -31,7 +32,17 @@ export default function App() {
           <RequireAuth>
             <CreateRestaurantPage  />
           </RequireAuth>
-        } /> 
+        } />
+        <Route path="/menu/:id/create" element={
+          <RequireAuth>
+            <CreateRestaurantPage  />
+          </RequireAuth>
+        } />  
+        <Route path="/menu/:id/menuitem/create" element={
+          <RequireAuth>
+            <CreateMenuItem  />
+          </RequireAuth>
+        } />  
       </Routes>
     </BrowserRouter>
   );

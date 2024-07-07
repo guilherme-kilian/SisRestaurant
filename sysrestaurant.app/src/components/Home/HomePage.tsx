@@ -4,7 +4,7 @@ import "./HomePage.css";
 import Header from "../Shared/Header";
 import { ShortRestaurantModel } from "../../models/Restaurant/ShortRestaurantModel";
 import { FilterRestaurantModel } from "../../models/Restaurant/FilterRestaurantModel";
-import Restaurant from "../Restaurant/Restaurant";
+import RestaurantCard from "../Restaurant/RestaurantCard";
 import { useNavigate } from "react-router-dom";
 
 const HomePage: React.FC = () => {
@@ -27,9 +27,12 @@ const HomePage: React.FC = () => {
   return <>
     <Header/>    
     <div className="container">
-        { restaurants?.map((restaurant) => 
-            <Restaurant item={restaurant} click={redirectToRestaurant} />
-        )}
+        { restaurants == null 
+            ? "Carregando..." 
+            : restaurants.length == 0 
+                ? <div className="alert alert-info">Nenhum restaurante cadastrado</div>
+                : restaurants?.map((restaurant) => <RestaurantCard item={restaurant} click={redirectToRestaurant} />)
+        }
     </div>
   </> ;
 }
