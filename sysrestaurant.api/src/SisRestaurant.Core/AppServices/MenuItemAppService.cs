@@ -26,7 +26,7 @@ namespace SisRestaurant.Core.AppServices
                 Db.Categories.Add(category);
             }
 
-            var item = new MenuItem(create.Name, create.Price, create.Product, category);
+            var item = new MenuItem(create.Name, create.Price, create.Product, category, create.Picture);
 
             Db.MenuItems.Add(item);
 

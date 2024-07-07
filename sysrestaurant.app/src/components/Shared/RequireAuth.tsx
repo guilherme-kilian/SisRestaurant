@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { isAuthenticated } from "../../services/sisRestaurantApi";
-import LoginPage from "../AccountPage";
+import LoginPage from "../Account/AccountPage";
 
 const RequireAuth: FC<{ children: React.ReactElement }> = ({ children }) => {
     const userIsLogged = isAuthenticated();

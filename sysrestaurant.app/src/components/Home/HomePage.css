@@ -1,0 +1,70 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: #343a40;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.restaurant-list {
+    display: flex;
+    gap: 15px;
+    padding: 0;
+    list-style-type: none;
+    transition: transform 0.5s ease;
+    margin: 0 -10px; /* Ajuste para corrigir a exibição no mobile */
+}
+
+.restaurant-item {
+    flex: 0 0 calc(33.33% - 20px); /* Ajuste para melhor espaçamento */
+    padding: 15px;
+    background-color: #ffffff;
+    border: 2px solid #343a40; /* Borda com a cor do cabeçalho */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.restaurant-item:hover {
+    transform: translateY(-5px);
+}
+
+.restaurant-item img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.header-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+}

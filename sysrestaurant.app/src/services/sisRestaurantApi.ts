@@ -43,11 +43,16 @@ export function isAuthenticated(): boolean {
 }
 
 export async function logIn(model: LoginModel): Promise<AuthenticationResult> {
-    var request = await axios.post<AuthenticationResult>(`${baseAddress}/authentication`, model)
-    var data = request.data
-    const token = data.authorizationToken;
-    localStorage.setItem(tokenKey, token);
-     return data;  
+    try{
+        var request = await axios.post<AuthenticationResult>(`${baseAddress}/authentication`, model)
+        var data = request.data
+        const token = data.authorizationToken;
+        localStorage.setItem(tokenKey, token);
+        return data;
+    }
+    catch(error){
+        throw new Error("Usuário ou senha inválidos");
+    }
 }
 
 export async function logOut(): Promise<void> {
