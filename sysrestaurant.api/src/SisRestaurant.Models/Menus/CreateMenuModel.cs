@@ -9,7 +9,6 @@ namespace SisRestaurant.Models.Menus
 
         public required int RestaurantId { get; set; }
 
-        [Required]
-        public required List<CreateMenuItemModel> Items { get; set; }
+        public List<CreateMenuItemModel> Items { get; set; } = [];
     }
 }

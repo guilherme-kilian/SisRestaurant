@@ -30,29 +30,9 @@ public class UserAppService : BaseAppService, IAppService<CreateUserModel, UserM
         return Mapper.Map<UserModel>(user);
     }
 
-    public Task<UserModel> Update(UpdateUserModel create)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<UserModel> Delete(string id)
-    {
-        throw new NotImplementedException();
-    }
-
     public async Task<UserModel> Get(string id)
     {
         var user = await _userManager.FindByIdAsync(id.ToString());
-
-        if (user is null)
-            throw new DataNotFoundException(nameof(user));
-
-        return Mapper.Map<UserModel>(user);
-    }
-
-    public async Task<UserModel> GetByEmail(string email)
-    {
-        var user = await _userManager.FindByEmailAsync(email);
 
         if (user is null)
             throw new DataNotFoundException(nameof(user));

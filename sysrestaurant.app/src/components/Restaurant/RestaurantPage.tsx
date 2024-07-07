@@ -40,7 +40,7 @@ const RestaurantPage : React.FC = () => {
     return <>
 
         { !restaurant ? "Carregando..." : 
-            <HeaderRestaurant restaurantName={restaurant.name}/>
+            <HeaderRestaurant restaurantId={restaurant.id} restaurantName={restaurant.name}/>
         }        
         <div className="container">
         <div className="restaurant-list">

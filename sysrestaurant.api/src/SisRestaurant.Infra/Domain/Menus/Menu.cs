@@ -18,7 +18,6 @@ public class Menu : SoftDelete
 
     public Menu(string name, List<MenuItem> items, Restaurant restaurant)
     {
-        if(items.Count == 0) throw new ArgumentException("EmptyItems");
         ArgumentNullException.ThrowIfNull(restaurant);
         ArgumentException.ThrowIfNullOrEmpty(name, "Name");
 

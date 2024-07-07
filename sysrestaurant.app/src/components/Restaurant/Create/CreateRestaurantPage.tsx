@@ -23,8 +23,8 @@ const CreateRestaurantPage : React.FC = () => {
         navigator('/');
     }
 
-    return <>
-            <div className="container">
+    return <> <div className="cadastro-body">
+            <div className="cadastro-container">
                 <h1>Cadastro de Restaurante</h1>
                 <form action="/processar-cadastro" method="post" onSubmit={handleSubmit}>
                     <label htmlFor="name">Nome do Restaurante:</label>
@@ -54,7 +54,8 @@ const CreateRestaurantPage : React.FC = () => {
                     <button type="submit">Cadastrar Restaurante</button>
                 </form>
             </div>
-        </>
+        </div>
+    </>
 }
 
 export default CreateRestaurantPage;

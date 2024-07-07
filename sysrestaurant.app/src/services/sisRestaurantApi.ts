@@ -13,6 +13,7 @@ import { CreateMenuItemModel } from "../models/MenuItem/CreateMenuItemModel";
 import { ReservationModel } from "../models/Reservation/ReservationModel";
 import { CreateReservationModel } from "../models/Reservation/CreateReservationModel";
 import { ShortRestaurantModel } from "../models/Restaurant/ShortRestaurantModel";
+import { CreateMenuModel } from "../models/Menu/CreateMenuModel";
 
 var baseAddress: string = 'https://localhost:7000/api/v1';
 
@@ -98,7 +99,7 @@ export async function getMenu(menuId: number): Promise<MenuModel>{
     return request.data;
 }
 
-export async function createMenu(model: MenuModel): Promise<MenuModel>{
+export async function createMenu(model: CreateMenuModel): Promise<MenuModel>{
     var request = await axios.post<MenuModel>(`${baseAddress}/menu`, model)
     return request.data;
 }
