@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import "./HeaderRestaurant.css";
 import { logOut } from "../../services/sisRestaurantApi";
 
-const HeaderRestaurant : React.FC<{ restaurantName: string, restaurantId: number}> = (props) => {
+const HeaderRestaurant : React.FC<{ restaurantName: string, restaurantId: number, owner:boolean}> = (props) => {
 
     var navigator = useNavigate();
 
@@ -19,7 +19,7 @@ const HeaderRestaurant : React.FC<{ restaurantName: string, restaurantId: number
                 <div className="header-links-3-restaurantes">
                     <a href="/">Página Inicial</a> |
                     <a href={`/restaurants/${props.restaurantId}/reservation`}>Realizar Reserva</a> |
-                    <a href={`/restaurants/${props.restaurantId}/menu/create`}>Criar menu</a> |
+                    {props.owner && <><a href={`/restaurants/${props.restaurantId}/menu/create`}>Criar menu</a> |</>}                    
                     <a href="#" onClick={signOut}>Sair</a>
                 </div>
             </div>

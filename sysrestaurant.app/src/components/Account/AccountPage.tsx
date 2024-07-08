@@ -28,7 +28,7 @@ const LoginPage: React.FC = () => {
   return <>
     <div className="container d-flex justify-content-center align-items-center vh-100">
           <div className="login-box">
-              <h2 className="text-center">Login</h2>
+              <h2 className="text-center">{creatingUser ? "Criar conta" : "Fazer login"}</h2>
               <form action="dashboard.html" method="post" onSubmit={handleSubmit}>
                   <div className="form-group">
                       <label htmlFor="email">Email:</label>
@@ -50,10 +50,10 @@ const LoginPage: React.FC = () => {
                   </>
                   }
                   <div className="form-group text-center">
-                      <input type="submit" className="btn btn-primary" value="Entrar" />
+                      <input type="submit" className="btn btn-primary" value={creatingUser ? "Criar" : "Entrar"} />
                   </div>
                   <div className="text-center">
-                    <a href="#" onClick={() => setCreatingUser(() => !creatingUser)}>{!creatingUser ? "Fazer login" : "Criar conta"}</a>
+                    <a href="#" onClick={() => setCreatingUser(() => !creatingUser)}>{creatingUser ? "Fazer login" : "Criar conta"}</a>
                   </div>
               </form>
           </div>

@@ -40,12 +40,14 @@ const RestaurantPage : React.FC = () => {
     return <>
     <div className="body-3-restaurantes">
         { !restaurant ? "Carregando..." : 
-            <HeaderRestaurant restaurantId={restaurant.id} restaurantName={restaurant.name}/>
+            <HeaderRestaurant restaurantId={restaurant.id} restaurantName={restaurant.name} owner={owner} />
         }        
         <div className="container-3-restaurantes">
             <div className="restaurant-list-3-restaurantes">
                 {!restaurant ? "Carregando..." : 
-                    restaurant.menus.map(m => <Menu menu={m} owner={owner} redirectCreateMenuItem={redirectToCreateMenuItem} />)
+                    restaurant.menus.length === 0 
+                        ? <div className="alert alert-info">Nenhum menu cadastrado</div>
+                        : restaurant.menus.map(m => <Menu menu={m} owner={owner} redirectCreateMenuItem={redirectToCreateMenuItem} />)
                 }
             </div>
         </div>

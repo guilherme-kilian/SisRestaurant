@@ -3,7 +3,7 @@ import "./MenuItem.css";
 
 const MenuItem : React.FC<MenuItemModel> = (props) => {
     return <>
-    <div className="restaurant-item-3-restaurantes">
+    <div className="restaurant-item-3-restaurantes mx-2">
         {props.picture ? 
             <img src={props.picture} alt="Entradas" />
         : ""}                    

@@ -29,7 +29,7 @@
     padding: 0;
     list-style-type: none;
     transition: transform 0.5s ease;
-    margin: 0 -10px; /* Ajuste para corrigir a exibição no mobile */
+    margin: 0; /* Ajuste para corrigir a exibição no mobile */
 }
 
 .restaurant-item-3-restaurantes {
@@ -50,6 +50,7 @@
     width: 100%;
     border-radius: 8px;
     margin-bottom: 10px;
+    max-height: 250px;
 }
 
 .pagination-3-restaurantes {

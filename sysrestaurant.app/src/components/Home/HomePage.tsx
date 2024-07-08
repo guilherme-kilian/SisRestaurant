@@ -27,7 +27,7 @@ const HomePage: React.FC = () => {
   return <>
     <Header/>
     <div className="restaurant-body">    
-        <div className="restaurant-container">
+        <div className="restaurant-container d-flex">
             { restaurants == null 
                 ? "Carregando..." 
                 : restaurants.length == 0 

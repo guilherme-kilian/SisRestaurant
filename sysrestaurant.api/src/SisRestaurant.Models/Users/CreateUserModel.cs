@@ -7,7 +7,7 @@ public class CreateUserModel
     [Length(5, 200)]
     public required string FullName { get; set; }
 
-    [Length(5, 200)]
+    [Length(3, 200)]
     public required string UserName { get; set; }
 
     [EmailAddress]

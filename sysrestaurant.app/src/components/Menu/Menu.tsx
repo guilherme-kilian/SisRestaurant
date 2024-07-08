@@ -9,7 +9,9 @@ const Menu : React.FC<{ menu: MenuModel, owner: boolean, redirectCreateMenuItem:
                 <div>{props.menu.name}</div>
             </div>
             <div className="card-body">
-                {props.menu.items.map(mi => <MenuItem {...mi} /> )}
+                <div className="d-flex">
+                    {props.menu.items.map(mi => <MenuItem {...mi} /> )}
+                </div>
             </div>
             <div className="card-footer">
                 {props.owner 
