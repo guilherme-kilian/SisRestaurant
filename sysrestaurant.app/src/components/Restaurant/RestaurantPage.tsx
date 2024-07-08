@@ -38,16 +38,16 @@ const RestaurantPage : React.FC = () => {
     }, [ id ])
 
     return <>
-
+    <div className="body-3-restaurantes">
         { !restaurant ? "Carregando..." : 
             <HeaderRestaurant restaurantId={restaurant.id} restaurantName={restaurant.name}/>
         }        
-        <div className="container">
-        <div className="restaurant-list">
-
-            {!restaurant ? "Carregando..." : 
-                restaurant.menus.map(m => <Menu menu={m} owner={owner} redirectCreateMenuItem={redirectToCreateMenuItem} />)
-            }
+        <div className="container-3-restaurantes">
+            <div className="restaurant-list-3-restaurantes">
+                {!restaurant ? "Carregando..." : 
+                    restaurant.menus.map(m => <Menu menu={m} owner={owner} redirectCreateMenuItem={redirectToCreateMenuItem} />)
+                }
+            </div>
         </div>
     </div>
     </>

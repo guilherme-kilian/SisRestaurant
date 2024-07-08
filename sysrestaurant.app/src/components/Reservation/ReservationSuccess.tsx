@@ -8,12 +8,14 @@ const ReservationSuccess : React.FC = () => {
     }
 
     return <>
-        <div className="container">
-            <h2>Reserva Confirmada!</h2>
-            <p>Obrigado por reservar conosco. Sua reserva foi confirmada com sucesso.</p>
-            <p>Enviaremos um lembrete um dia antes da sua reserva.</p>
-            <a href="index.html" className="btn" onClick={goHome}>Voltar para o Início</a>
+    <div className="body-4-reserva">
+        <div className="container-4-reserva">
+            <h2 className="h2-4-reserva">Reserva Confirmada!</h2>
+            <p className="p-4-reserva">Obrigado por reservar conosco. Sua reserva foi confirmada com sucesso.</p>
+            <p className="p-4-reserva">Enviaremos um lembrete um dia antes da sua reserva.</p>
+            <a href="#" className="btn btn-4-reserva" onClick={goHome}>Voltar para o Início</a>
         </div>
+    </div>
     </>
 }
 

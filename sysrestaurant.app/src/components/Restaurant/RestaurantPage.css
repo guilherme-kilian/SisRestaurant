@@ -1,32 +1,29 @@
-body {
+.body-3-restaurantes {
     font-family: 'Montserrat', sans-serif;
     background-color: #f8f9fa;
     margin: 0;
     padding: 0;
 }
 
-.header {
+.header-3-restaurantes {
     background-image: url('https://images.unsplash.com/photo-1558030154-d3605e91d892?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGJhcmJlY3VlfGVufDB8fDB8fHww');
-    
     background-size: cover;
     background-position: center;
     background-blend-mode: overlay;
     color: yellow; /* Cor do texto */
     text-shadow: 1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black; /* Sombra de texto para simular borda preta */
-    
-    
     padding: 10px 0;
     text-align: center;
 }
 
-.container {
+.container-3-restaurantes {
     max-width: 800px;
     margin: 20px auto;
     position: relative;
     overflow: hidden;
 }
 
-.restaurant-list {
+.restaurant-list-3-restaurantes {
     display: flex;
     gap: 15px;
     padding: 0;
@@ -35,7 +32,7 @@ body {
     margin: 0 -10px; /* Ajuste para corrigir a exibição no mobile */
 }
 
-.restaurant-item {
+.restaurant-item-3-restaurantes {
     flex: 0 0 calc(50% - 20px); /* Ajuste para dois itens por linha */
     padding: 15px;
     background-color: #ffffff;
@@ -45,22 +42,22 @@ body {
     transition: transform 0.3s;
 }
 
-.restaurant-item:hover {
+.restaurant-item-3-restaurantes:hover {
     transform: translateY(-5px);
 }
 
-.restaurant-item img {
+.restaurant-item-3-restaurantes img {
     width: 100%;
     border-radius: 8px;
     margin-bottom: 10px;
 }
 
-.pagination {
+.pagination-3-restaurantes {
     text-align: center;
     margin-top: 20px;
 }
 
-.pagination-btn {
+.pagination-btn-3-restaurantes {
     background-color: #007bff;
     color: white;
     border: none;
@@ -70,7 +67,7 @@ body {
     margin: 0 5px;
 }
 
-.header-links a {
+.header-links-3-restaurantes a {
     color: white;
     text-decoration: none;
     margin: 0 10px;

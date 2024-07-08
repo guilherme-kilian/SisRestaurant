@@ -1,12 +1,19 @@
-.header-links a {
+.restaurant-header-links a {
     color: white;
     text-decoration: none;
     margin: 0 10px;
 }
 
-.header {
+.restaurant-header {
     background-color: #343a40;
     color: white;
     padding: 10px 0;
     text-align: center;
+}
+
+.restaurant-container {
+    max-width: 800px;
+    margin: 20px auto;
+    position: relative;
+    overflow: hidden;
 }

@@ -1,19 +1,18 @@
-body {
+.restaurant-body {
     font-family: 'Montserrat', sans-serif;
     background-color: #f8f9fa;
     margin: 0;
     padding: 0;
-    color: black;
 }
 
-.header {
+.restaurant-header {
     background-color: #343a40;
     color: white;
     padding: 10px 0;
     text-align: center;
 }
 
-.container {
+.restaurant-container {
     max-width: 800px;
     margin: 20px auto;
     position: relative;
@@ -49,12 +48,12 @@ body {
     margin-bottom: 10px;
 }
 
-.pagination {
+.restaurant-pagination {
     text-align: center;
     margin-top: 20px;
 }
 
-.pagination-btn {
+.restaurant-pagination-btn {
     background-color: #007bff;
     color: white;
     border: none;
@@ -64,7 +63,7 @@ body {
     margin: 0 5px;
 }
 
-.header-links a {
+.restaurant-header-links a {
     color: white;
     text-decoration: none;
     margin: 0 10px;

@@ -33,7 +33,8 @@ const ReservationPage : React.FC = () => {
     }
 
     return <>
-        <div className="container">
+    <div className="reservation-body">
+        <div className="reservation-container">
         <h2 className="text-center">Reserva de Restaurante</h2>
         <form action="confirmacao.html" method="post" onSubmit={create}>
             <div className="form-group">
@@ -51,7 +52,8 @@ const ReservationPage : React.FC = () => {
             <div className="form-group text-center">
                 <input type="submit" className="btn btn-success" value="Enviar Reserva" />
             </div>
-        </form>
+            </form>
+        </div>
     </div>
     </>
 }

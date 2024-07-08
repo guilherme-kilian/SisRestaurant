@@ -25,14 +25,16 @@ const HomePage: React.FC = () => {
     }, []);
 
   return <>
-    <Header/>    
-    <div className="container">
-        { restaurants == null 
-            ? "Carregando..." 
-            : restaurants.length == 0 
-                ? <div className="alert alert-info">Nenhum restaurante cadastrado</div>
-                : restaurants?.map((restaurant) => <RestaurantCard item={restaurant} click={redirectToRestaurant} />)
-        }
+    <Header/>
+    <div className="restaurant-body">    
+        <div className="restaurant-container">
+            { restaurants == null 
+                ? "Carregando..." 
+                : restaurants.length == 0 
+                    ? <div className="alert alert-info">Nenhum restaurante cadastrado</div>
+                    : restaurants?.map((restaurant) => <RestaurantCard item={restaurant} click={redirectToRestaurant} />)
+            }
+        </div>
     </div>
   </> ;
 }
