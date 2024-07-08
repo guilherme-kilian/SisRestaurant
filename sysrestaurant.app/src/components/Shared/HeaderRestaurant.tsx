@@ -19,6 +19,7 @@ const HeaderRestaurant : React.FC<{ restaurantName: string, restaurantId: number
                 <div className="header-links-3-restaurantes">
                     <a href="/">Página Inicial</a> |
                     <a href={`/restaurants/${props.restaurantId}/reservation`}>Realizar Reserva</a> |
+                    <a href={`/restaurants/${props.restaurantId}/menu/create`}>Criar menu</a> |
                     <a href="#" onClick={signOut}>Sair</a>
                 </div>
             </div>

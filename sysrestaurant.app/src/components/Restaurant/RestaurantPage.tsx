@@ -17,7 +17,7 @@ const RestaurantPage : React.FC = () => {
     }
 
     function redirectToCreateMenuItem(menuId: number){
-        navigator(`/menu/${menuId}/menuitem/create`);
+        navigator(`/restaurants/${restaurant?.id}/menu/${menuId}/menuitem/create`);
     }
 
     useEffect(() => {

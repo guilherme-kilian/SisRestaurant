@@ -1,31 +1,40 @@
 import { FormEvent } from "react";
 import "./CreateMenuItem.css";
 import { createMenuItem } from "../../../services/sisRestaurantApi";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { CreateMenuItemModel } from "../../../models/MenuItem/CreateMenuItemModel";
 const CreateMenuItem : React.FC = () => {
 
-    const { id } = useParams();
+    const { restaurantId, id } = useParams();
+
+    const navigator = useNavigate();
 
     async function create(form: FormEvent<HTMLFormElement>) : Promise<void>{
         form.preventDefault();
+        try{
 
-        if(!id) return;
-
-        var data = new FormData(form.currentTarget);
-        var obj = Object.fromEntries(data.entries());
-
-        var name = obj.name.toString();
-        var product = obj.product.toString();
-        var price = obj.price.toString();
-        var categoryName = obj.categoryName.toString();
-        var picture = obj.picture.toString();
-
-        if(!name || !product || !price || !categoryName || !picture) return;
-
-        var create = new CreateMenuItemModel(name, product, parseFloat(price), categoryName, picture);
-        await createMenuItem(parseInt(id), create)
-    }    
+            if(!id) return;
+    
+            var data = new FormData(form.currentTarget);
+            var obj = Object.fromEntries(data.entries());
+    
+            var name = obj.name.toString();
+            var product = obj.product.toString();
+            var price = obj.price.toString();
+            var categoryName = obj.categoryName.toString();
+            var picture = obj.picture.toString();
+            var description = obj.description.toString();
+    
+            if(!name || !product || !price || !categoryName || !picture) return;
+    
+            var create = new CreateMenuItemModel(name, product, parseFloat(price), categoryName, picture, description);
+            await createMenuItem(parseInt(id), create)
+            navigator(`/restaurants/${restaurantId}`)
+        }    
+        catch(e){
+            console.log(e);
+        }
+    }
 
     return <>
     <div className="menu-body">   
@@ -38,7 +47,7 @@ const CreateMenuItem : React.FC = () => {
                 </div>
                 <div className="form-group">
                     <label htmlFor="product">Produto:</label>
-                    <textarea id="product" name="product" className="form-control" rows={3} required></textarea>
+                    <input type="text" id="product" name="product" className="form-control" required />
                 </div>
                 <div className="form-group">
                     <label htmlFor="price">Preço:</label>
@@ -47,6 +56,10 @@ const CreateMenuItem : React.FC = () => {
                 <div className="form-group">
                     <label htmlFor="categoryName">Categoria do item:</label>
                     <input type="text" id="categoryName" name="categoryName" className="form-control" required />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="description">Descrição:</label>
+                    <input type="text" id="description" name="description" className="form-control" required />
                 </div>
                 <div className="form-group">
                     <label htmlFor="picture">Imagem do Item:</label>

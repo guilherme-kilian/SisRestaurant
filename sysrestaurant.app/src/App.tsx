@@ -7,6 +7,7 @@ import RestaurantPage from "./components/Restaurant/RestaurantPage";
 import ReservationPage from "./components/Reservation/ReservationPage";
 import CreateRestaurantPage from "./components/Restaurant/Create/CreateRestaurantPage";
 import CreateMenuItem from "./components/MenuItem/Create/CreateMenuItem";
+import CreateMenu from "./components/Menu/Create/CreateMenu";
 
 export default function App() {
   return (
@@ -33,12 +34,12 @@ export default function App() {
             <CreateRestaurantPage  />
           </RequireAuth>
         } />
-        <Route path="/menu/:id/create" element={
+        <Route path="/restaurants/:id/menu/create" element={
           <RequireAuth>
-            <CreateRestaurantPage  />
+            <CreateMenu  />
           </RequireAuth>
         } />  
-        <Route path="/menu/:id/menuitem/create" element={
+        <Route path="/restaurants/:restaurantId/menu/:id/menuitem/create" element={
           <RequireAuth>
             <CreateMenuItem  />
           </RequireAuth>

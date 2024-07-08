@@ -53,7 +53,7 @@ const LoginPage: React.FC = () => {
                       <input type="submit" className="btn btn-primary" value="Entrar" />
                   </div>
                   <div className="text-center">
-                    <a href="#" onClick={() => setCreatingUser(() => !creatingUser)}>{creatingUser ? "Fazer login" : "Criar conta"}</a>
+                    <a href="#" onClick={() => setCreatingUser(() => !creatingUser)}>{!creatingUser ? "Fazer login" : "Criar conta"}</a>
                   </div>
               </form>
           </div>

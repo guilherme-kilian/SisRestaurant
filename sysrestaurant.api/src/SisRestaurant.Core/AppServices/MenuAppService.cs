@@ -26,8 +26,9 @@ namespace SisRestaurant.Core.AppServices
 
             var menuItems = new List<MenuItem>();
 
-            foreach (var item in create.Items)
-                menuItems.Add(await _menuItemAppService.Create(item));
+            if(create.Items is not null)
+                foreach (var item in create.Items)
+                    menuItems.Add(await _menuItemAppService.Create(item));
 
             var restaurant = user.Restaurants.First(r => r.Id == create.RestaurantId);
 

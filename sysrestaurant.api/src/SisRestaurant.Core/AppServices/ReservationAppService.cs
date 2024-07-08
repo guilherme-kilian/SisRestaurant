@@ -15,11 +15,15 @@ namespace SisRestaurant.Core.AppServices
 
         public async Task<ReservationModel> Create(string userId, CreateReservationModel create)
         {
-            var user = await Db.Users.GetUserWithRestaurant(userId, create.RestaurantId);
+            var restaurant = await Db.Restaurants
+                .IncludeSettings()
+                .GetById(create.RestaurantId).FirstOrErrorAsync();
 
-            var restaurant = user.GetRestaurant(create.RestaurantId);
+            var user = await Db.Users.GetById(userId);
 
             var reservation = restaurant.Reserve(create.Date, user, create.Count, details: create.Details);
+
+            await Db.SaveChangesAsync();
 
             return Mapper.Map<ReservationModel>(reservation);
         }

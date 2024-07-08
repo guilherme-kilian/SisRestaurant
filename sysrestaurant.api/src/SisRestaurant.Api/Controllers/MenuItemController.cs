@@ -17,7 +17,7 @@ namespace SisRestaurant.Api.Controllers
         }
 
         [HttpPost]
-        public Task<MenuItemModel> AddItem(int menuId, CreateMenuItemModel create)
+        public Task<MenuItemModel> AddItem(int menuId, [FromBody]CreateMenuItemModel create)
         {
             return _menuItemAppService.AddItem(menuId, create);
         }
