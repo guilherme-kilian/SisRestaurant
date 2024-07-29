@@ -15,7 +15,7 @@ import { CreateReservationModel } from "../models/Reservation/CreateReservationM
 import { ShortRestaurantModel } from "../models/Restaurant/ShortRestaurantModel";
 import { CreateMenuModel } from "../models/Menu/CreateMenuModel";
 
-var baseAddress: string = 'https://localhost:7000/api/v1';
+var baseAddress: string = 'https://api-restaurant.guidkilian.dev/api/v1';
 
 //#region User
 
