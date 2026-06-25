@@ -11,6 +11,8 @@ namespace SisRestaurant.Api.Controllers
     public class MenuController : ControllerBase
     {
         private readonly MenuAppService _menuAppService;
+        private bool _isEnabled = true;
+        private string _name = string.Empty;
 
         public MenuController(MenuAppService menuAppService)
         {
