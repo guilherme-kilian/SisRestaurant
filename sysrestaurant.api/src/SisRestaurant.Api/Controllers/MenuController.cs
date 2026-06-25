@@ -12,7 +12,7 @@ namespace SisRestaurant.Api.Controllers
     {
         private readonly MenuAppService _menuAppService;
         private bool _isEnabled = true;
-        private string _name = string.Empty;
+        private string _name = string.Empty
 
         public MenuController(MenuAppService menuAppService)
         {
